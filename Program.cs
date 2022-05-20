@@ -12,7 +12,7 @@ void Main()
     // Let the moose speak!
     MooseSays("H I, I'M  M A G I C !");
     MooseSays("I really am magic");
-    MoosePrompt("Ask now, and ye shall recieve...a randomly generated answer");
+    MoosePrompt();
 }
 
 void MooseSays(string message)
@@ -47,11 +47,31 @@ void MooseSays(string message)
     ");
 }
 
-void MoosePrompt(string prompt)
+void MoosePrompt()
 {
-    MooseSays(prompt);
+    MooseSays("Ask now, and ye shall recieve...a randomly generated answer");
     string userQuestion = Console.ReadLine().ToLower();
-    getRandomAnswer();
+    if (userQuestion != "")
+    {
+        getRandomAnswer();
+        promptRepeat();
+    }
+}
+
+void promptRepeat()
+{
+    Console.WriteLine("Do you have another question? Y/N");
+    string res = Console.ReadLine().ToLower();
+    while (res != "y" && res != "n")
+    {
+        Console.Write($"You must type either y or n. Do you even C#?");
+        res = Console.ReadLine().ToLower();
+    }
+
+    if (res == "y")
+    {
+        MoosePrompt();
+    }
 }
 
 void getRandomAnswer()
