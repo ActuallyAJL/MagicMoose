@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 Main();
 
@@ -11,26 +12,7 @@ void Main()
     // Let the moose speak!
     MooseSays("H I, I'M  M A G I C !");
     MooseSays("I really am magic");
-    MooseSays("Ask now, and ye shall recieve...a randomly generated answer");
-
-    // As a question
-    MooseQuestion("Is Canada real?", "Really? It seems very unlikely.", "I  K N E W  I T !!!");
-    MooseQuestion("Are you enthusiastic?", "Yay!", "You should try it!");
-    MooseQuestion("Do you love C# yet?", "Good job sucking up to your instructor!", "You will...oh, yes, you will...");
-    MooseQuestion("Do you want to know a secret?", "ME TOO!!!! I love secrets...tell me one!", "Oh, no...secrets are the best, I love to share them!");
-}
-
-void MooseQuestion(string question, string yesResponse, string noResponse)
-{
-    bool isYes = MooseAsks(question);
-    if (isYes)
-    {
-        MooseSays(yesResponse);
-    }
-    else
-    {
-        MooseSays(noResponse);
-    }
+    MoosePrompt("Ask now, and ye shall recieve...a randomly generated answer");
 }
 
 void MooseSays(string message)
@@ -65,23 +47,39 @@ void MooseSays(string message)
     ");
 }
 
-bool MooseAsks(string question)
+void MoosePrompt(string prompt)
 {
-    Console.Write($"{question} (Y/N): ");
-    string answer = Console.ReadLine().ToLower();
+    MooseSays(prompt);
+    string userQuestion = Console.ReadLine().ToLower();
+    getRandomAnswer();
+}
 
-    while (answer != "y" && answer != "n")
+void getRandomAnswer()
+{
+    List<String> answerList = new List<string>()
     {
-        Console.Write($"{question} (Y/N): ");
-        answer = Console.ReadLine().ToLower();
-    }
-
-    if (answer == "y")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+        "As I see it, yes.",
+        "Ask again later.",
+        "Cannot predict now.",
+        "Concentrate and ask again.",
+        "Don’t count on it.",
+        "It is certain.",
+        "It is decidedly so.",
+        "Most likely.",
+        "My reply is no.",
+        "My sources say no.",
+        "Outlook not so good.",
+        "Outlook good.",
+        "Reply hazy, try again.",
+        "Signs point to yes.",
+        "Very doubtful.",
+        "Without a doubt.",
+        "Yes.",
+        "Yes -- definitely.",
+        "You may rely on it."
+    };
+    Random r = new Random();
+    int thisRand = r.Next(0, 19);
+    // Console.WriteLine(thisRand);
+    Console.WriteLine(answerList[thisRand]);
 }
